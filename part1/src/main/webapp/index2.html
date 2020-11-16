@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="box">
+    <br> <input v-model.lazy="myText">
+    <br> ~{{myText}}~
+    <br> <input type="number" v-model.number="myText2">
+    <br> {{myText2}}
+    <br> <input type="text" v-model.trim="myText3">
+    <br> ~{{myText3}}~
+
+    <button @click="handlefetchClick()">fetch</button>
+    <button @click="handleaxiosClick()">axios</button>
+    <ul>
+        <li v-for="data in dog">{{data}}</li>
+        <li v-for="data in dog2">{{data}}</li>
+    </ul>
+</div>
+</body>
+<script type="application/javascript">
+
+    new Vue({
+        el: "#box",
+        data: {
+            myText: '',
+            myText2: '',
+            myText3: '',
+            dog:[],
+            dog2:[]
+        },
+        methods: {
+            handlefetchClick(){
+                fetch("test.json").then(res=>res.json()).then(res=>{
+                    this.dog = res.animals.dog;
+                });
+            },
+            handleaxiosClick(){
+                axios.get("test.json").then(res=> {
+                    this.dog2 = res.data.animals.dog;
+                }).catch(res=>{
+                    console.error(res);
+                })
+            }
+        }
+    });
+
+</script>
+</html>

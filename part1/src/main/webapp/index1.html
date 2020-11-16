@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.red {
+				background-color: red;
+			}
+
+			.green {
+				background-color: green;
+			}
+
+			.a {
+				background-color: gold;
+			}
+
+			.b {
+				background-color: burlywood;
+			}
+
+			.c {
+				background-color: hotpink;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div>
+			{{name}}
+			{{1+1}}
+		</div>
+
+		<div id="box">
+			{{1+1}}
+			{{1==1}}
+			{{name}}
+			<div v-html="html"></div>
+
+			<div v-show="show">显示与隐藏</div>
+
+			<div v-if="create">创建与删除dom</div>
+
+			<button @click="click()">点击</button>
+
+			<div :class="active?'red':'green'"> 动态绑定class 三目 </div>
+			<div :class="classObj"> 动态绑定class 对象 </div>
+			<div :class="classArr"> 动态绑定class 数组 </div>
+			<br><br>
+			<div :style="'background:' + (active?'red':'green')"> 动态绑定style 三目 </div>
+			<div :style="styleObj"> 动态绑定style 对象 </div>
+			<div :style="styleArr"> 动态绑定style 数组 </div>
+
+			<ul v-if="list.length">
+				<li v-for="data in list">{{data}}</li>
+			</ul>
+			<div v-else>
+				列表是空的
+			</div>
+
+			<div v-if="witch===1">
+				111
+			</div>
+			<div v-else-if="witch===2">
+				222
+			</div>
+			<div v-else>
+				witch = {{witch}}
+			</div>
+
+			<hr>
+
+			<ul>
+				<li v-for="data in dataList">{{data}}</li>
+			</ul>
+			<ul>
+				<li v-for="(data,index) in dataList">{{data}} --- {{index}}</li>
+			</ul>
+			<ul>
+				<li v-for="(data,key) of obj">{{data}} --- {{key}}</li>
+			</ul>
+			<label>动态搜索</label>
+			<input @input="handleInput()" v-model='myText' />
+			<ul>
+				<li v-for="data in myDataList">{{data}}</li>
+			</ul>
+
+			<button @click="handleClick" type="button">click1</button>
+			<button @click="handleClick()" type="button">click1</button>
+			<button @click="isShow = !isShow" type="button">click1</button>
+			<div v-show="isShow">
+				isShow
+			</div>
+
+			<ul @click="handleulClick">
+				<li @click="handleClick">冒泡</li>
+				<li @click.stop="handleliClick">阻止冒泡</li>
+				<li @click.once="handleliClick">仅能点一次</li>
+				<li @click="handleliClick($event)">传入原生事件阻止冒泡</li>
+			</ul>
+			<ul @click.self="handleulClick">
+				<li @click="handleliClick">handleliClick 阻止冒泡</li>
+			</ul>
+			<a href="http://www.baidu.com" @click.prevent="handleAClick">使用prevent事件修饰</a>
+			<a href="http://www.baidu.com" @click="handleAClick">未使用事件修饰</a>
+
+			<input type="text" @keyup.enter="handleKeyup($event)" /> 监听回车键
+			<input type="text" @keyup.13="handleKeyup($event)" /> 监听回车键
+
+			<hr>
+			<label>记住我</label>
+			<input type="checkbox" v-model="checkbox" />
+			{{checkbox}}
+			<hr>
+			<label>爱好</label>
+			<input type="checkbox" v-model="checkGroup" value="电影" /> 电影
+			<input type="checkbox" v-model="checkGroup" value="吃饭" /> 吃饭
+			<input type="checkbox" v-model="checkGroup" value="打豆豆" /> 打豆豆
+			{{checkGroup}}
+			<hr>
+			<label>性别</label>
+			<input type="radio" v-model="radio" value="未知" /> 未知
+			<input type="radio" v-model="radio" value="男" /> 男
+			<input type="radio" v-model="radio" value="女" /> 女
+			{{radio}}
+			<hr>
+			<label>购物车</label>
+			<input type="checkbox" v-model="selectAll" @change="selectAllItems()" />
+			<ul>
+				<li v-for="data in items">
+					<input type="checkbox" v-model="itemGroup" :value="data" @change="handleSelectAllCallback()" />
+					{{data}}
+					<button @click="updateItemQuantity(data)">del</button> {{data.quantity}} <button @click="data.quantity++">add</button>
+				</li>
+			</ul>
+			{{itemGroup}}
+			<div>总计：{{ sumItem() }}</div>
+		</div>
+
+		<script type="text/javascript">
+			let v = new Vue({
+				el: "#box",
+				data: {
+					name: "名字",
+					html: "<p><hr>ok<hr></p>",
+					show: true,
+					create: true,
+					active: true,
+					classObj: {
+						a: true,
+						b: true
+					},
+					classArr: ['b', 'c'],
+					styleObj: {
+						backgroundColor: 'red'
+					},
+					styleArr: [],
+					list: [],
+					witch: 1,
+					dataList: ['111', '222', '333'],
+					obj: {
+						id: 'a',
+						name: 'abc',
+						age: 123
+					},
+					myDataList: ['abc', 'dev', 'oet', 'adf', '9kje', 'asdwg', 'aaa'],
+					myDataListBak: ['abc', 'dev', 'oet', 'adf', '9kje', 'asdwg', 'aaa'],
+					myText: '',
+					isShow: true,
+					checkbox: false,
+					checkGroup: [],
+					radio: '',
+					items: [{
+						id: 1,
+						name: "商品1",
+						quantity: 1,
+						price: 12.5
+					}, {
+						id: 2,
+						name: "商品2",
+						quantity: 3,
+						price: 11.2
+					}, {
+						id: 3,
+						name: "商品3",
+						quantity: 2,
+						price: 65
+					}],
+					itemGroup: [],
+					selectAll: false
+				},
+				methods: {
+					click() {
+						this.active = !this.active;
+
+						this.classObj.a = !this.classObj.a;
+						this.classObj.b = !this.classObj.b;
+						this.classArr.pop();
+
+						this.styleObj.backgroundColor = "green";
+						this.styleArr.push({
+							backgroundColor: 'pink'
+						});
+						this.styleArr.push({
+							fontSize: '19px'
+						});
+
+						this.list = ['aaa', 'bbb', 'ccc'];
+						this.witch++;
+
+						console.log("push() pop() shift() splice() sort() reverse()可以检测到变动");
+						this.list.push("ddd");
+						this.list.pop();
+						this.list.splice(0, 1, 'newOne');
+						this.list = this.list.concat(['999']);
+						Vue.set(this.list, 1, 'xxx');
+
+					},
+					handleInput() {
+						this.myDataList = this.myDataListBak.filter(item => item.indexOf(this.myText) > -1);
+					},
+					handleClick() {
+						console.log("handle Click")
+						this.isShow = !this.isShow;
+					},
+					handleulClick() {
+						console.log("handle ul Click")
+					},
+					handleliClick($ev) {
+						// 停止事件的传播
+						// $ev.stopPropagation();
+						console.log("handle li Click")
+					},
+					handleAClick($ev) {
+						// 不执行与事件关联的默认动作
+						// $ev.preventDefault();
+						console.log("handle a click");
+					},
+					handleKeyup(ev) {
+						console.log(ev.keyCode + "监听回车键");
+					},
+					sumItem() {
+						var sum = 0;
+						for (i in this.itemGroup) {
+							sum += this.itemGroup[i].quantity * this.itemGroup[i].price;
+						}
+						return sum;
+					},
+					selectAllItems() {
+						if (this.selectAll) {
+							this.itemGroup = this.items;
+						} else {
+							this.itemGroup = [];
+						}
+					},
+					handleSelectAllCallback() {
+						this.selectAll = this.itemGroup.length === this.items.length
+					},
+					updateItemQuantity(data){
+						if(data.quantity>1){
+							data.quantity--;
+						}
+					}
+
+				}
+			});
+		</script>
+	</body>
+</html>

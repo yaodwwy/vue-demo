@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="box">
+    <label>动态搜索</label>
+    <input v-model='myText'/>
+    <ul>
+        <li v-for="data in getMyData">{{data}}</li>
+    </ul>
+    <label>首字母自动大写</label>
+    <input v-model='firstUpper'/> {{getFirstUpper}}
+    <hr>
+    <label>组件式开发</label>
+    <navibar name="home" :myshow="false"></navibar>
+    <navibar name="list" :myshow="true"></navibar>
+    <navibar :name="parentName" :myshow="true"></navibar>
+
+    <hr>
+    <label>子组件传父组件</label>
+    <child @parent-event="handleParentEvent($event)"></child>
+</div>
+</body>
+<script type="application/javascript">
+
+    Vue.component("navibar", {
+        template: `
+          <div>
+          <button @click="handleClick()">返回</button>
+          navibar---{{ name }}
+          <button v-show="myshow">主页</button>
+          <!--          <child></child>-->
+          <!--          <mychild></mychild>-->
+          {{ compData }}
+          </div>
+        `,
+        methods: {
+            handleClick() {
+                console.log("handleClick 返回")
+            }
+        },
+        components: {
+            mychild: {
+                template: ` <div>mychild  </div>`
+            }
+        },
+        data() {
+            return {
+                compData: '组件内部的状态绑定'
+            }
+        },
+        props: ['name', 'myshow'],
+        props: {
+            name: String,
+            myshow: Boolean
+        }
+    });
+    Vue.component('child', {
+        template: `
+          <div>child one
+          <button @click="childMethods()">点击</button>
+          </div>`,
+        data() {
+            return {
+                childStatus: 'good!'
+            }
+        },
+        methods: {
+            childMethods() {
+                this.$emit('parent-event', this.childStatus);
+            }
+        }
+    })
+    new Vue({
+        el: '#box',
+        data: {
+            parentName: "p-back",
+            myText: '',
+            firstUpper: '',
+            myDataList: ['abc', 'dev', 'oet', 'adf', '9kje', 'asdwg', 'aaa']
+        },
+        methods: {
+            handleParentEvent(ev) {
+                console.log('接收信号 ', ev);
+            }
+        },
+        computed: {
+            getMyData() {
+                return this.myDataList.filter(item => item.indexOf(this.myText) > -1);
+            },
+            getFirstUpper() {
+                return this.firstUpper.substring(0, 1).toUpperCase() + this.firstUpper.substring(1);
+            }
+        }
+    });
+</script>
+</html>
