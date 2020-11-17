@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="ref">
+    <label> vue ref通信 </label>
+    <input ref="mytext">
+    <button @click="handleClick">点击</button>
+    <hr>
+    <label> vue ref通信 取子组件状态 </label>
+    <child ref="mychildtext"></child>
+    <button @click="handleClick2">点击</button>
+    <hr>
+    <label>事件总线</label>
+    <component-a></component-a>
+    <component-b></component-b>
+    <hr>
+    <label>动态组件</label>
+    <keep-alive>
+        <component :is="who"></component>
+    </keep-alive>
+
+    <button @click="who='home'">首页</button>
+    <button @click="who='list'">列表</button>
+    <button @click="who='shopcar'">购物车</button>
+
+    <hr>
+    <label>slot 插槽</label>
+    <swiper>
+        <li @click="handleClick()">111</li>
+        <li>222</li>
+        <div slot="a">abcd</div>
+        <div slot="b">efgh</div>
+    </swiper>
+</div>
+
+</body>
+<script type="application/javascript">
+    var bus = new Vue();
+    Vue.component('swiper', {
+        template: `
+        <div>
+            <slot name="a"></slot>
+            swiper
+            <slot name="b"></slot>
+        <ul>
+            <slot></slot>
+        </ul>
+        </div>
+        `
+    })
+    Vue.component('child', {
+        template: `
+          <div>
+          child
+          </div>`,
+        data() {
+            return {
+                childStatus: '子组件状态'
+            }
+        }
+    })
+
+    Vue.component('componentA', {
+        template: `
+          <div>组件A
+          <input ref="mytext"/>
+          <button @click="handleClick()">点击</button>
+          </div>`,
+        methods: {
+            handleClick() {
+                bus.$emit("test", this.$refs.mytext.value)
+            }
+        }
+    })
+
+    Vue.component('componentB', {
+        template: `<div> 组件B <input ref="show"></div>`,
+        mounted() {
+            bus.$on("test", (data) => {
+                this.$refs.show.value = data;
+                console.log("组件B收到：", data);
+            });
+        }
+    })
+
+    new Vue({
+        el: '#ref',
+        methods: {
+            handleClick() {
+                console.log("父组件的方法")
+                console.log("ref: ", this.$refs.mytext.value);
+            },
+            handleClick2() {
+                console.log("ref: ", this.$refs.mychildtext.childStatus);
+            }
+        },
+        data: {
+            who: 'home'
+        },
+        components: {
+            home: {
+                template: `<div>home<input/></div>`
+            },
+            list: {
+                template: `<div>list</div>`
+            },
+            shopcar: {
+                template: `<div>shopcar</div>`
+            },
+        }
+    })
+
+</script>
+</html>
