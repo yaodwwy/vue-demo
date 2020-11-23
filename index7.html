@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>
+        .a {
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div class="swiper-container a">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(data,index) in dataList" v-swipe="{index:index,length:dataList.length}">
+                {{data}}
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+</div>
+</body>
+<script>
+
+    Vue.directive('swipe', {
+        inserted(el, bind) {
+            if (bind.value.index === bind.value.length - 1) {
+                new Swiper('.swiper-container', {
+                    loop: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                    }
+                })
+            }
+        }
+    })
+    let v = new Vue({
+        el: '#box', data: {
+            dataList: [],
+        },
+        mounted() {
+            setTimeout(() => {
+                this.dataList = ['1111', '2222', '33333']
+            }, 2000)
+        }
+    })
+</script>
+</html>

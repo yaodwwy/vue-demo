@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>
+        .a {
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <swiper :key="dataList.length">
+        <div class="swiper-slide" v-for="data in dataList">{{data}}</div>
+    </swiper>
+
+
+    <div v-hello="'red'">111</div>
+    <div v-hello="color">222</div>
+
+</div>
+</body>
+<script>
+    Vue.component('swiper', {
+        template: `
+          <div class="swiper-container a">
+          <div class="swiper-wrapper">
+            <slot></slot>
+          </div>
+          <div class="swiper-pagination"></div>
+          </div>`,
+        mounted() {
+            new Swiper('.swiper-container', {
+                loop: true, // 循环模式选项
+
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                }
+            })
+        }
+    })
+
+    Vue.directive('hello',{
+        inserted(el,bind){
+            el.style.background=bind.value;
+        },
+        update(el,bind){
+            el.style.background=bind.value;
+        }
+    })
+    let v = new Vue({
+        el: '#box', data: {
+            dataList: [],
+            color:'yellow'
+        },
+        mounted() {
+            setTimeout(() => {
+                this.dataList = ['1111', '2222', '33333']
+            }, 2000)
+        }
+    })
+</script>
+</html>

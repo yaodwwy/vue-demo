@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .mystyle-enter-active, .mystyle-leave-active {
+            transition: all .2s;
+        }
+
+        .mystyle-enter, .mystyle-leave-to {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .mybounce-enter-active {
+            animation: bounce-in .2s;
+        }
+
+        .mybounce-leave-active {
+            animation: bounce-in .2s reverse;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <label>单个元素过渡</label>
+    <button @click="isshow=!isshow">点击</button>
+    <transition name="mystyle">
+        <p v-show="isshow">我是一个新动画</p>
+    </transition>
+    <transition name="mybounce">
+        <p v-show="isshow">我是第二个新动画</p>
+    </transition>
+    <hr>
+    <label>
+        多个元素过渡
+    </label>
+
+    <button @click="isshow2=!isshow2">点击</button>
+    <transition name="mystyle" mode="in-out">
+        <p v-if="isshow2" key="1">我是第二个新动画1</p>
+        <p v-else key="2">我是第二个新动画2</p>
+    </transition>
+    <hr>
+    <label>
+        列表过渡
+    </label>
+
+    <input v-model="myText">
+    <button @click="handleAdd()">增加</button>
+    <!--    <ul>-->
+    <transition-group tag="ul" name="mystyle">
+        <li v-for="(data,index) in dataList" :key="data">
+            {{data}} -- {{index}}
+            <button @click="handleDel(index)">删除</button>
+        </li>
+    </transition-group>
+    <!--    </ul>-->
+
+    <hr>
+    <label>
+        组件生命周期
+    </label>
+    <button @click="isshow = !isshow">销毁</button>
+    <child v-if="isshow"></child>
+
+    <hr>
+    <label>
+        过滤器
+    </label>
+
+    <ul>
+        <li v-for="data in movieList" :key="data.id">
+            <h2>{{data.nm}}</h2>
+<!--            <img :src="changePath(data.img)"></img>-->
+            <img :src="data.img | changePath"></img>
+        </li>
+
+    </ul>
+
+</div>
+</body>
+<script>
+
+    Vue.filter('changePath', function (data) {
+        return data.replace('w.h', '128.180');
+    });
+
+    Vue.component('child', {
+        template: `
+          <div>
+          <button @click="handleChildClick()">点击</button>
+          child -- {{ text }}
+          </div>`,
+        data() {
+            return {
+                text: true
+            }
+        }, methods: {
+            handleChildClick() {
+                this.text = !this.text;
+            }
+        }, beforeCreate() {
+            console.log("beforeCreate ->>")
+        }, created() {
+            console.log("created ->>")
+        }, beforeMount() {
+            console.log("beforeMount ->>")
+        }, mounted() {
+            console.log("mounted ->>")
+        }, beforeUpdate() {
+            console.log("beforeUpdate ->>")
+        }, updated() {
+            console.log("updated ->>")
+        }, beforeDestroy() {
+            console.log("beforeDestroy ->>")
+        }, destroyed() {
+            console.log("destroyed ->>")
+
+        }
+    })
+
+    var v = new Vue({
+        el: '#box',
+        data: {
+            isshow: true,
+            isshow2: true,
+            myText: '',
+            dataList: [],
+            movieList: []
+        },
+        methods: {
+            handleAdd() {
+                this.dataList.push(this.myText);
+            },
+            handleDel(index) {
+                this.dataList.splice(index, 1);
+            },changePath(data){
+                return data.replace('w.h', '128.180');
+            }
+        }, mounted() {
+            axios.get("movie.json").then(res => {
+                this.movieList = res.data.movieList;
+            });
+        }
+    })
+</script>
+</html>
