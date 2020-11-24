@@ -1,6 +1,7 @@
 <template>
 <div>
   navi-bar
+  <slot></slot>
 </div>
 </template>
 
