@@ -1,6 +1,11 @@
 <template>
 <div>
   sidebar
+  <ul>
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+  </ul>
 </div>
 </template>
 
@@ -11,5 +16,7 @@ export default {
 </script>
 
 <style scoped>
-
+li{
+  background-color: sandybrown;
+}
 </style>
