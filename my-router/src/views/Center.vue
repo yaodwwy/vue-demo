@@ -1,10 +1,13 @@
 <template>
-<div>center</div>
+  <div>center</div>
 </template>
 
 <script>
 export default {
-  name: 'Center'
+  name: 'Center',
+  beforeRouteEnter (to, from, next) {
+    next()
+  }
 }
 </script>
 

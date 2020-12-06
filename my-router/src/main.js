@@ -4,6 +4,10 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+  next()
+})
+
 new Vue({
   router,
   render: h => h(App)
