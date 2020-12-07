@@ -1,12 +1,17 @@
 <template>
-<div>
-  tabbar
+<nav>
   <ul>
-    <router-link to="/center" tag="li" active-class="myactive">center</router-link>
-    <router-link to="/cinema" tag="li" active-class="myactive">cinema</router-link>
-    <router-link to="/film" tag="li" active-class="myactive">Film</router-link>
+    <router-link to="/center" tag="li" active-class="myactive">
+      <i class="iconfont icon-3column"></i>
+      center</router-link>
+    <router-link to="/cinema" tag="li" active-class="myactive">
+      <i class="iconfont icon-3column"></i>
+      cinema</router-link>
+    <router-link to="/film" tag="li" active-class="myactive">
+      <i class="iconfont icon-3column"></i>
+      Film</router-link>
   </ul>
-</div>
+</nav>
 </template>
 
 <script>
@@ -15,8 +20,24 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .myactive {
-  color: red;
+  color: #ffb45e;
+}
+nav{
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  background-color: azure;
+  ul{
+    display: flex;
+    li{
+      flex: 1;
+      line-height: 50px;
+      text-align: center;
+    }
+  }
 }
 </style>

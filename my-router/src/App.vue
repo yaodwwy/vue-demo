@@ -12,3 +12,16 @@ export default {
   components: { tabbar }
 }
 </script>
+
+<style lang="scss">
+*{
+  margin: 0px;
+  padding: 0px;
+}
+html{
+  height: 100%;
+}
+li{
+  list-style: none;
+}
+</style>

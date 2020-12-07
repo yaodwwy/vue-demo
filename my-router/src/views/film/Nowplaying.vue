@@ -2,13 +2,24 @@
   <div>
     Nowplaying
     <ul>
-      <li v-for="data in dataList" :key="data.filmId" @click="handlePageChange(data)">{{ data.name }}</li>
+      <li v-for="data in dataList" :key="data.filmId" @click="handlePageChange(data)">
+        <img :src="data.poster"/>
+        <h3>{{ data.name }}</h3>
+        <p>观众评分：{{ data.grade }}</p>
+        <p>主演：{{ data.actors | actorFilter }}</p>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Vue from 'vue'
+
+Vue.filter('actorFilter', function (data) {
+  if(data)
+  return data.map(item => item.name).join(' ')
+})
 
 export default {
   name: 'Nowplaying',
@@ -38,6 +49,20 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+ul {
+  li {
+    overflow: hidden;
+    padding: 5px;
 
+    img {
+      width: 80px;
+      float: left;
+    }
+
+    h3 {
+      padding: 1px;
+    }
+  }
+}
 </style>
