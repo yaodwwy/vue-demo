@@ -25,6 +25,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.myswiper{
+  height: 240px;
+  text-align: center;
+}
 </style>
 
