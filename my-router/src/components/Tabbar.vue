@@ -25,6 +25,7 @@ export default {
   color: #ffb45e;
 }
 nav{
+  z-index: 999;
   position: fixed;
   bottom: 0px;
   left: 0px;

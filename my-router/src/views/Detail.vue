@@ -1,18 +1,37 @@
 <template>
-  <div>
-    <h3>{{ data.name }}</h3>
-    <img :src="data.poster" width="100%">
+  <div v-if="film">
+    <img :src="film.poster" class="poster">
+    <h3>{{ film.name }}</h3>
+    <h3>演员</h3>
+    <swiper preview="4" id="actors" class="actors">
+      <div class="swiper-slide" v-for="data in film.actors" :key="data.name">
+        <img :src="data.avatarAddress"/>
+        <p>{{data.name}}</p>
+      </div>
+    </swiper>
+    <h3>剧照</h3>
+    <swiper preview="3" id="photos" class="photos">
+      <div class="swiper-slide" v-for="(data,index) in film.photos" :key="index">
+        <img :src="data"/>
+      </div>
+    </swiper>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import swiper from "./detail/Swiper";
+import bus from '@/bus'
 export default {
   name: 'Detail',
+  components: {swiper},
   data () {
     return {
-      data: ''
+      film: null
     }
+  },
+  beforeMount() {
+    bus.$emit('showBar',false)
   },
   mounted () {
     this.data = this.$route.params.id
@@ -24,12 +43,17 @@ export default {
         'X-Host': 'mall.film-ticket.film.info'
       }
     }).then((res) => {
-      this.data = res.data.data.film
+      this.film = res.data.data.film
     })
+  },
+  beforeDestroy() {
+    bus.$emit('showBar',true)
   }
 }
 </script>
 
 <style scoped>
-
+.poster{
+  width: 100%;
+}
 </style>
