@@ -31,7 +31,8 @@ export default {
     }
   },
   beforeMount() {
-    bus.$emit('showBar',false)
+    this.$store.commit('showMe',false);
+    //bus.$emit('showBar',false)
   },
   mounted () {
     this.data = this.$route.params.id
@@ -47,7 +48,8 @@ export default {
     })
   },
   beforeDestroy() {
-    bus.$emit('showBar',true)
+    this.$store.commit('showMe',false);
+    //bus.$emit('showBar',true)
   }
 }
 </script>

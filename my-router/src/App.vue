@@ -1,24 +1,39 @@
 <template>
   <div id="app">
-    <tabbar v-show="isShow"></tabbar>
+    <tabbar v-show="myShowState"></tabbar>
     <router-view></router-view>
   </div>
 </template>
 <script>
 import tabbar from '@/components/Tabbar'
 import bus from '@/bus'
+import {mapState} from "vuex";
 
 export default {
   data() {
     return {
-      isShow: true
+      myShowState: true
     }
   },
   components: {tabbar},
   beforeMount() {
     bus.$on('showBar', (data) => {
-      this.isShow = data;
+      this.myShowState = data;
     })
+  },
+  // computed: {
+  //   isShow() {
+  //     return this.$store.state.showMe;
+  //   }
+  // }
+
+  // computed:mapState['isShow']
+
+  computed: {
+    ...mapState(['showState']),
+    others() {
+      return "otherComputed";
+    }
   }
 }
 </script>
