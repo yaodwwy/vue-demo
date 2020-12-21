@@ -19,18 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2328e44a-e635-4418-8ada-a26ee1f49df0" name="Default Changelist" comment="轮播 平滑滚动 事件总线">
-      <change afterPath="$PROJECT_DIR$/my-router/src/moudle/MoudleA.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-router/src/moudle/MoudleB.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-router/src/store.js" afterDir="false" />
+    <list default="true" id="2328e44a-e635-4418-8ada-a26ee1f49df0" name="Default Changelist" comment="vuex elementUI ES6 export">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-router/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-router/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-router/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-router/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-router/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-router/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-router/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-router/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-router/src/views/Center.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-router/src/views/Center.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-router/src/views/Detail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-router/src/views/Detail.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-router/src/views/film/Comingsoon.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-router/src/views/film/Comingsoon.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-router/src/views/film/Nowplaying.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my-router/src/views/film/Nowplaying.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +161,7 @@
       <workItem from="1607614243421" duration="577000" />
       <workItem from="1607867532810" duration="4939000" />
       <workItem from="1608045547360" duration="1262000" />
-      <workItem from="1608558820181" duration="5063000" />
+      <workItem from="1608558820181" duration="6698000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1605597636246</created>
@@ -225,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607872427502</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="vuex elementUI ES6 export">
+      <created>1608564076663</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1608564076663</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,7 +254,8 @@
     <MESSAGE value="过滤器 iconfont swiper" />
     <MESSAGE value="轮播 固顶" />
     <MESSAGE value="轮播 平滑滚动 事件总线" />
-    <option name="LAST_COMMIT_MESSAGE" value="轮播 平滑滚动 事件总线" />
+    <MESSAGE value="vuex elementUI ES6 export" />
+    <option name="LAST_COMMIT_MESSAGE" value="vuex elementUI ES6 export" />
   </component>
   <component name="WindowStateProjectService">
     <state x="449" y="187" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1607347102911">
@@ -340,10 +342,10 @@
       <screen x="0" y="40" width="1536" height="824" />
     </state>
     <state width="498" height="477" key="SwitcherDM/0.40.1536.824@0.40.1536.824" timestamp="1607613741122" />
-    <state x="376" y="195" key="Vcs.Push.Dialog.v2" timestamp="1607872429310">
+    <state x="376" y="195" key="Vcs.Push.Dialog.v2" timestamp="1608564079632">
       <screen x="0" y="40" width="1536" height="824" />
     </state>
-    <state x="376" y="195" key="Vcs.Push.Dialog.v2/0.40.1536.824@0.40.1536.824" timestamp="1607872429310" />
+    <state x="376" y="195" key="Vcs.Push.Dialog.v2/0.40.1536.824@0.40.1536.824" timestamp="1608564079632" />
     <state x="392" y="202" key="Vcs.Push.Dialog.v2/0.40.1600.860/-900.-116.600.1027@0.40.1600.860" timestamp="1605597639124" />
     <state x="93" y="133" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1606227298014">
       <screen x="0" y="40" width="1536" height="824" />

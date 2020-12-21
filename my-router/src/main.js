@@ -6,10 +6,16 @@ import all from "./moudle/MoudleA";
 import {aa} from "./moudle/MoudleB";
 import {bb as b} from "./moudle/MoudleB";
 
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+// import ElementUI from 'element-ui';
+// import 'element-ui/lib/theme-chalk/index.css';
+//
+// Vue.use(ElementUI);
 
-Vue.use(ElementUI);
+import 'mint-ui/lib/style.css'
+
+import {InfiniteScroll} from 'mint-ui';
+Vue.use(InfiniteScroll)
+
 
 console.log(all,aa,b);
 
