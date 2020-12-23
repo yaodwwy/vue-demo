@@ -16,6 +16,14 @@ import 'mint-ui/lib/style.css'
 import {InfiniteScroll} from 'mint-ui';
 Vue.use(InfiniteScroll)
 
+import { Swipe, SwipeItem } from 'mint-ui';
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
+
+import { IndexList, IndexSection,Cell } from 'mint-ui';
+Vue.component(IndexList.name, IndexList);
+Vue.component(IndexSection.name, IndexSection);
+Vue.component(Cell.name, Cell);
 
 console.log(all,aa,b);
 

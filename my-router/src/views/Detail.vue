@@ -31,7 +31,7 @@ export default {
     }
   },
   beforeMount() {
-    this.$store.commit('showMe',false);
+    this.$store.commit('showMeMutation',false);
     //bus.$emit('showBar',false)
   },
   mounted () {
@@ -48,7 +48,7 @@ export default {
     })
   },
   beforeDestroy() {
-    this.$store.commit('showMe',false);
+    this.$store.commit('showMeMutation',true);
     //bus.$emit('showBar',true)
   }
 }

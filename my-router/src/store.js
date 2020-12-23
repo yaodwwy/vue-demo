@@ -11,11 +11,11 @@ export default new Vuex.Store({
   },
   getters: {
     comingListGetter(state) {
-      return state.comingList.filter((item, index) => index < 3);
+      return state.comingList.filter((item, index) => index < 10);
     }
   },
   mutations: {
-    showMe(state, data) {
+    showMeMutation(state, data) {
       state.showMe = data;
     },
     comingListMutation(state, data) {

@@ -6,6 +6,7 @@ import Center from '@/views/Center'
 import Nowplaying from './views/film/Nowplaying'
 import Comingsoon from './views/film/Comingsoon'
 import Detail from './views/Detail'
+import City from "./views/City";
 
 Vue.use(Router)
 
@@ -38,6 +39,10 @@ export default new Router({
     {
       path: '/center',
       component: Center
+    },
+    {
+      path: '/city',
+      component: City
     },
     {
       path: '*',

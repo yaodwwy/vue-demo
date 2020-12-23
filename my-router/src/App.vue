@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <tabbar v-show="myShowState"></tabbar>
+    <tabbar v-show="showMe"></tabbar>
     <router-view></router-view>
   </div>
 </template>
@@ -12,13 +12,13 @@ import {mapState} from "vuex";
 export default {
   data() {
     return {
-      myShowState: true
+      //myShowState: true
     }
   },
   components: {tabbar},
   beforeMount() {
     bus.$on('showBar', (data) => {
-      this.myShowState = data;
+      //this.myShowState = data;
     })
   },
   // computed: {
@@ -30,7 +30,7 @@ export default {
   // computed:mapState['isShow']
 
   computed: {
-    ...mapState(['showState']),
+    ...mapState(['showMe']),
     others() {
       return "otherComputed";
     }

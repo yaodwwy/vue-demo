@@ -10,6 +10,9 @@
     <router-link to="/film" tag="li" active-class="myactive">
       <i class="iconfont icon-3column"></i>
       Film</router-link>
+    <router-link to="/city" tag="li" active-class="myactive">
+      <i class="iconfont icon-3column"></i>
+      City</router-link>
   </ul>
 </nav>
 </template>
